@@ -1,0 +1,101 @@
+platform,category,question,answer
+Razorpay,Security,How do I enable app lock?,Go to Settings > Security > Enable fingerprint or PIN lock.
+Paytm,Recharge,Can I set a recharge reminder?,"Yes, enable notifications under Recharge settings."
+GPay,Recharge,How can I recharge my mobile?,Go to 'Recharge' > Enter number > Choose plan > Pay.
+PhonePe,Card,How to block a lost card?,Go to Card Settings > Tap 'Block Card' immediately.
+Jupiter,Loans,What is the interest rate on loans?,It varies by user profile and is shown before you apply.
+Jupiter,UPI,What is the daily UPI limit?,"Most apps allow ₹1,00,000 per day via UPI."
+Razorpay,Bank Linking,How do I link a bank account?,Go to 'Add Bank' > Choose bank > Verify with OTP.
+Jupiter,Payments,How to pay using QR code?,Tap 'Scan & Pay' > Point to merchant QR > Enter amount.
+GPay,UPI,Can I link two bank accounts?,"Yes, multiple accounts can be linked under UPI."
+Razorpay,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+Razorpay,Loans,What is the interest rate on loans?,It varies by user profile and is shown before you apply.
+Paytm,UPI,How do I reset my UPI PIN?,Go to 'Bank Account' in your app > Tap 'Reset UPI PIN'.
+Paytm,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+PhonePe,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+PhonePe,Payments,Can I schedule a payment?,"Yes, set up auto-pay in your bill payment settings."
+Razorpay,KYC,Why is KYC important?,KYC is mandatory as per RBI guidelines to continue services.
+GPay,Refunds,Why is my refund delayed?,Some refunds may be held up due to bank processing.
+GPay,Loans,Can I get a personal loan?,Check eligibility under 'Loans' > Apply if eligible.
+PhonePe,KYC,How do I complete KYC?,Go to Profile > KYC > Upload ID and address proof.
+GPay,KYC,Why is KYC important?,KYC is mandatory as per RBI guidelines to continue services.
+Razorpay,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+Jupiter,Refunds,How can I track a refund?,Go to 'Transactions' > Select payment > Check refund status.
+Jupiter,Recharge,Can I set a recharge reminder?,"Yes, enable notifications under Recharge settings."
+PhonePe,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+PhonePe,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+Paytm,Recharge,How can I recharge my mobile?,Go to 'Recharge' > Enter number > Choose plan > Pay.
+Paytm,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+Jupiter,Bank Linking,My bank is not listed. What should I do?,Try later or contact support to raise a request.
+GPay,KYC,Why is KYC important?,KYC is mandatory as per RBI guidelines to continue services.
+PhonePe,Refunds,Why is my refund delayed?,Some refunds may be held up due to bank processing.
+Paytm,Bank Linking,My bank is not listed. What should I do?,Try later or contact support to raise a request.
+PhonePe,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+Paytm,Security,How to report a suspicious transaction?,Tap on the transaction > Select 'Report'.
+Jupiter,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+PhonePe,UPI,Can I link two bank accounts?,"Yes, multiple accounts can be linked under UPI."
+Razorpay,Card,How to block a lost card?,Go to Card Settings > Tap 'Block Card' immediately.
+GPay,Loans,Can I get a personal loan?,Check eligibility under 'Loans' > Apply if eligible.
+Razorpay,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+Paytm,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+PhonePe,Recharge,Can I set a recharge reminder?,"Yes, enable notifications under Recharge settings."
+Jupiter,Security,How to report a suspicious transaction?,Tap on the transaction > Select 'Report'.
+PhonePe,Refunds,How can I track a refund?,Go to 'Transactions' > Select payment > Check refund status.
+PhonePe,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+Paytm,UPI,What is the daily UPI limit?,"Most apps allow ₹1,00,000 per day via UPI."
+Paytm,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+Jupiter,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+GPay,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+Jupiter,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+Jupiter,UPI,Can I link two bank accounts?,"Yes, multiple accounts can be linked under UPI."
+Paytm,Payments,Can I schedule a payment?,"Yes, set up auto-pay in your bill payment settings."
+Paytm,Security,How to report a suspicious transaction?,Tap on the transaction > Select 'Report'.
+Jupiter,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+GPay,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+GPay,Loans,Can I get a personal loan?,Check eligibility under 'Loans' > Apply if eligible.
+PhonePe,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+GPay,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+PhonePe,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+Paytm,UPI,How do I reset my UPI PIN?,Go to 'Bank Account' in your app > Tap 'Reset UPI PIN'.
+PhonePe,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+Paytm,Refunds,Why is my refund delayed?,Some refunds may be held up due to bank processing.
+PhonePe,Bank Linking,How do I link a bank account?,Go to 'Add Bank' > Choose bank > Verify with OTP.
+Jupiter,Recharge,Can I set a recharge reminder?,"Yes, enable notifications under Recharge settings."
+Paytm,Refunds,How can I track a refund?,Go to 'Transactions' > Select payment > Check refund status.
+PhonePe,Loans,What is the interest rate on loans?,It varies by user profile and is shown before you apply.
+GPay,Payments,Can I schedule a payment?,"Yes, set up auto-pay in your bill payment settings."
+Jupiter,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+Paytm,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+Paytm,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+Razorpay,Refunds,How can I track a refund?,Go to 'Transactions' > Select payment > Check refund status.
+PhonePe,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.
+GPay,Recharge,How can I recharge my mobile?,Go to 'Recharge' > Enter number > Choose plan > Pay.
+Razorpay,Recharge,How can I recharge my mobile?,Go to 'Recharge' > Enter number > Choose plan > Pay.
+Jupiter,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+Paytm,Payments,How to pay using QR code?,Tap 'Scan & Pay' > Point to merchant QR > Enter amount.
+PhonePe,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+PhonePe,Wallet,Why is wallet balance not updating?,It could be a delay in syncing with the server.
+PhonePe,UPI,How do I reset my UPI PIN?,Go to 'Bank Account' in your app > Tap 'Reset UPI PIN'.
+PhonePe,Card,Can I change my card PIN?,"Yes, from the 'Manage Card' option in your app."
+Paytm,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+GPay,Card,How to block a lost card?,Go to Card Settings > Tap 'Block Card' immediately.
+GPay,Recharge,Can I set a recharge reminder?,"Yes, enable notifications under Recharge settings."
+Jupiter,Card,Can I change my card PIN?,"Yes, from the 'Manage Card' option in your app."
+Razorpay,Payments,How to pay using QR code?,Tap 'Scan & Pay' > Point to merchant QR > Enter amount.
+PhonePe,Card,Can I change my card PIN?,"Yes, from the 'Manage Card' option in your app."
+PhonePe,Card,How do I activate my debit card?,Open the Cards section > Tap 'Activate Card'.
+Jupiter,Security,How do I enable app lock?,Go to Settings > Security > Enable fingerprint or PIN lock.
+Jupiter,Refunds,Why is my refund delayed?,Some refunds may be held up due to bank processing.
+Razorpay,KYC,Why is KYC important?,KYC is mandatory as per RBI guidelines to continue services.
+Paytm,Refunds,Why is my refund delayed?,Some refunds may be held up due to bank processing.
+Jupiter,Security,How to report a suspicious transaction?,Tap on the transaction > Select 'Report'.
+Paytm,UPI,Can I link two bank accounts?,"Yes, multiple accounts can be linked under UPI."
+Razorpay,Recharge,How can I recharge my mobile?,Go to 'Recharge' > Enter number > Choose plan > Pay.
+GPay,Payments,Can I schedule a payment?,"Yes, set up auto-pay in your bill payment settings."
+GPay,Card,How to block a lost card?,Go to Card Settings > Tap 'Block Card' immediately.
+Paytm,UPI,Why did my UPI payment fail?,Due to network issues or bank downtime. Try again later.
+Jupiter,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+GPay,Wallet,How do I add money to wallet?,Tap 'Add Money' > Enter amount > Choose payment mode.
+PhonePe,Bank Linking,How do I link a bank account?,Go to 'Add Bank' > Choose bank > Verify with OTP.
+Paytm,Security,How to report a suspicious transaction?,Tap on the transaction > Select 'Report'.
+GPay,Refunds,When will I get my refund?,Refunds typically take 5–7 business days.

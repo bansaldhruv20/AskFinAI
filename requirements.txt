@@ -1,0 +1,9 @@
+openai
+streamlit
+sentence-transformers
+faiss-cpu
+pandas
+numpy
+langdetect
+deep-translator
+python-dotenv
