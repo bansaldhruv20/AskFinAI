@@ -1,0 +1,47 @@
+[
+  {
+    "query": "How do I reset my UPI PIN?",
+    "expected_question": "How do I reset my UPI PIN?",
+    "group": "English"
+  },
+  {
+    "query": "When will I get my refund?",
+    "expected_question": "When will I get my refund?",
+    "group": "English"
+  },
+  {
+    "query": "How do I complete KYC?",
+    "expected_question": "How do I complete KYC?",
+    "group": "English"
+  },
+  {
+    "query": "upi pin kaise reset karu",
+    "expected_question": "How do I reset my UPI PIN?",
+    "group": "Hinglish"
+  },
+  {
+    "query": "paise wapas kab aayega",
+    "expected_question": "When will I get my refund?",
+    "group": "Hinglish"
+  },
+  {
+    "query": "kyc kaise kare",
+    "expected_question": "How do I complete KYC?",
+    "group": "Hinglish"
+  },
+  {
+    "query": "What is the capital of France?",
+    "expected_question": null,
+    "group": "Unrelated"
+  },
+  {
+    "query": "Write a recipe for chocolate cake",
+    "expected_question": null,
+    "group": "Unrelated"
+  },
+  {
+    "query": "Who won the football world cup?",
+    "expected_question": null,
+    "group": "Unrelated"
+  }
+]
