@@ -1,123 +1,150 @@
-from logger import log_interaction
 import streamlit as st
-import numpy as np
-import pandas as pd
-import faiss
-import os
-from sentence_transformers import SentenceTransformer
-from deep_translator import GoogleTranslator
-from langdetect import detect
-from openai import OpenAI
-from dotenv import load_dotenv
 
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
+from faq_engine import FAQEngine, LocalGenerator
+from logger import log_interaction, log_feedback
+
+
+st.set_page_config(
+    page_title="AskFinAI",
+    page_icon="💬",
+)
+
+st.title("AskFinAI — Fintech FAQ Assistant")
+
+st.caption(
+    "Demo FAQ data, not bank-specific advice. "
+    "Never enter account numbers, PINs or OTPs."
+)
+
+st.write(
+    "Ask in English or simple Hinglish. "
+    "Answers are in English."
+)
+
 
 @st.cache_resource
-def load_resources():
-    embed_model = SentenceTransformer("all-MiniLM-L6-v2")
-    index = faiss.read_index("faq_index.faiss")
-    df = pd.read_pickle("faq_data.pkl")
-    return embed_model, index, df
+def engine():
+    return FAQEngine()
 
-embed_model, index, df = load_resources()
 
-def find_best_faq(query, top_k=1):
-    embedding = embed_model.encode([query])
-    embedding = np.array(embedding).astype('float32')
-    distances, indices = index.search(embedding, top_k)
-    idx = indices[0][0]
-    return df.iloc[idx]['question'], df.iloc[idx]['answer'], distances[0][0]
+@st.cache_resource
+def generator():
+    return LocalGenerator()
 
-def get_similarity_score(text1, text2):
-    emb1 = embed_model.encode([text1])[0]
-    emb2 = embed_model.encode([text2])[0]
-    emb1 /= np.linalg.norm(emb1)
-    emb2 /= np.linalg.norm(emb2)
-    return float(np.dot(emb1, emb2))
 
-def rephrase_with_openai(user_q, faq_q, faq_a):
-    prompt = (
-        f"You are a helpful assistant for an app user.\n\n"
-        f"User question: {user_q}\n"
-        f"Matched FAQ question: {faq_q}\n"
-        f"Answer: {faq_a}\n\n"
-        f"Rephrase the answer in a friendly and natural tone:"
-    )
-    try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7,
-            max_tokens=150
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        print(f"OpenAI error: {e}")
-        return faq_a
+use_rag = st.checkbox(
+    "Use local RAG rephrasing (no API key)",
+    value=False,
+)
 
-def translate_text(text, target='en'):
-    try:
-        return GoogleTranslator(source='auto', target=target).translate(text)
-    except:
-        return text  #fallback in case not working fine and return original text
+st.caption(
+    "Semantic search retrieves a FAQ. "
+    "Optional local RAG generates a response from that FAQ; "
+    "review the reference for accuracy."
+)
 
-st.set_page_config(page_title="Jupiter FAQ Bot", page_icon="🤖")
-st.title("🤖 Jupiter Help Centre FAQ Bot")
-st.write("Ask your question in English, Hindi, or Hinglish — get a friendly answer instantly!")
+with st.form("question_form"):
+    question = st.text_input("Ask your question:")
+    submitted = st.form_submit_button("Find answer")
 
-user_input = st.text_input("Ask your question:")
+if submitted:
+    st.session_state.pop("result", None)
+    st.session_state.pop("feedback_saved", None)
 
-if user_input:
-    with st.spinner("Generating answer..."):
+    if not question.strip():
+        st.warning("Please enter a question.")
+    else:
         try:
-            detected_lang = detect(user_input)
-            query_en = translate_text(user_input, target='en') if detected_lang != 'en' else user_input
+            with st.spinner("Searching FAQs..."):
+                result = engine().search(question)
 
-            matched_q, matched_a, dist = find_best_faq(query_en)
-            rephrased = rephrase_with_openai(query_en, matched_q, matched_a)
-            similarity = get_similarity_score(matched_a, rephrased)
-            final_answer = translate_text(rephrased, target=detected_lang) if detected_lang != 'en' else rephrased
-            st.success("Here's your answer:")
-            st.markdown(f"**Q:** {matched_q}")
-            st.markdown(f"**A:** {final_answer}")
-            st.caption(f"Language: {detected_lang.upper()} | FAQ Match Score: {1 - dist:.2f} | GPT Similarity: {similarity:.2f}")
+                result["user_question"] = question
+                result["reference"] = result["answer"]
 
-            # Log to logger
-            log_interaction(
-                user_input,
-                matched_q,
-                matched_a,
-                final_answer,
-                detected_lang,
-                1 - dist,
-                similarity
+                if use_rag and result["accepted"]:
+                    try:
+                        result["answer"] = generator().generate(
+                            question,
+                            result,
+                        )
+                        result["mode"] = "Local RAG"
+                    except Exception:
+                        st.warning(
+                            "Local generation is unavailable. "
+                            "Showing the retrieved FAQ answer."
+                        )
+
+                st.session_state.result = result
+
+        except Exception:
+            st.error(
+                "Could not load the FAQ engine. "
+                "Check the CSV and download access to the "
+                "embedding model; see README."
             )
 
-            #Feedback section
-            st.markdown("---")
-            st.write("Was this answer helpful?")
-            feedback = st.radio("Feedback", ("👍 Yes", "👎 No"), horizontal=True, key="feedback_radio")
+if "result" in st.session_state:
+    result = st.session_state.result
 
-            if feedback:
-                feedback_value = 1 if feedback == "👍 Yes" else 0
-                st.success("Thanks for your feedback!")
+    st.write(result["answer"])
 
-                feedback_data = {
-                    "question": user_input,
-                    "matched_faq": matched_q,
-                    "answer_given": final_answer,
-                    "language": detected_lang,
-                    "match_score": 1 - dist,
-                    "similarity": similarity,
-                    "feedback": feedback_value
-                }
-                feedback_df = pd.DataFrame([feedback_data])
-                if os.path.exists("feedback_log.csv"):
-                    feedback_df.to_csv("feedback_log.csv", mode='a', header=False, index=False)
-                else:
-                    feedback_df.to_csv("feedback_log.csv", index=False)
+    st.caption(
+        f"{result['mode']} · "
+        f"cosine similarity {result['score']:.3f} "
+        "(not a confidence probability)"
+    )
 
-        except Exception as err:
-            st.error(f"Something went wrong: {err}")
+    if result["accepted"]:
+        with st.expander("Retrieved reference"):
+            st.write(result["question"])
+            st.write(result["reference"])
+            st.write("Category:", result["category"])
+
+    consent = st.checkbox(
+        "Save this demo question and answer locally for evaluation",
+        key="log_consent",
+    )
+
+    with st.form("feedback_form"):
+        helpful = st.radio(
+            "Was this helpful?",
+            ["Yes", "No"],
+            index=None,
+        )
+
+        feedback_submit = st.form_submit_button(
+            "Submit feedback",
+            disabled=st.session_state.get(
+                "feedback_saved",
+                False,
+            ),
+        )
+
+    if (
+        feedback_submit
+        and not st.session_state.get("feedback_saved", False)
+    ):
+        if helpful is None:
+            st.warning(
+                "Select Yes or No before submitting."
+            )
+
+        elif not consent:
+            st.info(
+                "Enable local saving to record feedback. "
+                "No interaction has been saved."
+            )
+
+        else:
+            try:
+                log_interaction(result)
+                log_feedback(result, helpful == "Yes")
+
+                st.session_state.feedback_saved = True
+                st.success("Feedback saved. Thank you!")
+
+            except OSError:
+                st.error(
+                    "Unable to save feedback. "
+                    "Check write permissions for the logs directory."
+                )
