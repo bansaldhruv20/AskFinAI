@@ -1,13 +1,26 @@
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-import pandas as pd
+"""Explicitly rebuild legacy artifacts."""
 
-df = pd.read_csv("random_faq_100.csv")
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(df['question'].tolist()).astype('float32')
-index = faiss.IndexFlatL2(embeddings.shape[1])
-index.add(embeddings)
-faiss.write_index(index, "faq_index.faiss")
-df.to_pickle("faq_data.pkl")
-print("Indexed:", len(df))
+import faiss
+from faq_engine import FAQEngine, ROOT
+
+
+def main():
+    engine = FAQEngine()
+
+    faiss.write_index(
+        engine.index,
+        str(ROOT / "faq_index.faiss"),
+    )
+
+    engine.data.to_pickle(
+        ROOT / "faq_data.pkl"
+    )
+
+    print(
+        f"Indexed {len(engine.data)} unique FAQs "
+        "using normalized inner-product search."
+    )
+
+
+if __name__ == "__main__":
+    main()
