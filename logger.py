@@ -1,5 +1,3 @@
-"""Opt-in local logging."""
-
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
