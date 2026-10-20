@@ -1,30 +1,55 @@
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-import pandas as pd
+from functools import lru_cache
+from faq_engine import FAQEngine
 
-index = faiss.read_index("faq_index.faiss")
-df = pd.read_pickle("faq_data.pkl")
-model = SentenceTransformer('all-MiniLM-L6-v2')
+@lru_cache(maxsize=1)
+def get_engine():
+    return FAQEngine()
+
 
 def find_best_faq_answer(user_question, top_k=1):
-    user_embedding = model.encode([user_question])
-    user_embedding = np.array(user_embedding).astype('float32')
-    distances, indices = index.search(user_embedding, top_k)
-    best_idx = indices[0][0]
-    best_question = df.iloc[best_idx]['question']
-    best_answer = df.iloc[best_idx]['answer']
-    return best_question, best_answer, distances[0][0]
+    if top_k != 1:
+        raise ValueError(
+            "This assistant returns one best FAQ; "
+            "top_k must be 1."
+        )
+
+    result = get_engine().search(user_question)
+
+    matched = (
+        result["question"]
+        if result["accepted"]
+        else "No relevant FAQ"
+    )
+
+    return matched, result["answer"], result["score"]
+
+
+def main():
+    print(
+        "AskFinAI semantic FAQ assistant. "
+        "Type exit to quit."
+    )
+
+    while True:
+        try:
+            question = input("Question: ").strip()
+        except EOFError:
+            break
+
+        if question.lower() == "exit":
+            break
+
+        if question:
+            matched, answer, score = (
+                find_best_faq_answer(question)
+            )
+
+            print(
+                f"FAQ: {matched}\n"
+                f"Answer: {answer}\n"
+                f"Cosine similarity: {score:.3f}"
+            )
+
 
 if __name__ == "__main__":
-    print(" Welcome to the FAQ Bot ")
-    while True:
-        user_query = input("\nAsk your question (or type 'exit' to quit): ")
-        if user_query.lower() == 'exit':
-            print("Exiting. Goodbye!")
-            break
-        matched_q, matched_a, distance = find_best_faq_answer(user_query)
-        confidence = 1 - distance 
-        print(f"\n Matched FAQ: {matched_q}")
-        print(f"Answer: {matched_a}")
-        print(f"Confidence Score: {confidence:.4f}")
+    main()
