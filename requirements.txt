@@ -1,9 +1,8 @@
-openai
-streamlit
-sentence-transformers
-faiss-cpu
-pandas
-numpy
-langdetect
-deep-translator
-python-dotenv
+torch==2.14.1
+streamlit==1.66.0
+sentence-transformers==6.1.0
+transformers==5.20.2
+faiss-cpu==1.15.1
+pandas==3.0.6
+numpy==2.5.4
+sentencepiece==0.2.1
